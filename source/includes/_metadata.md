@@ -1,6 +1,6 @@
 # Metadaten
 
-> BEISPIEL ANFRAGE
+> BEISPIELANFRAGE
 
 ```shell
 $ curl https://api.paymey.com/v2/transactions \  
@@ -14,7 +14,7 @@ $ curl https://api.paymey.com/v2/transactions \
   -d signature=ZGIwMGQ0NDVjNmQ5NjRhMTgx...
 ```
 
-> BEISPIEL RÜCKGABE
+> BEISPIELRÜCKGABE
 
 ```json
 {
@@ -38,11 +38,11 @@ $ curl https://api.paymey.com/v2/transactions \
 
 ```
 
-PAYMEY bietet bei einigen Objekten den `metadata` Parameter an.
+PAYMEY bietet bei einigen Objekten den `metadata`-Parameter an.
 
-Dieser Parameter kann dazu benutzt werden, Key-Value Paare an das Objekt zu hängen. Dadurch können Anwender-spezifische Informationen hinzugefügt werden, beispielweise die Bestellnummer zu einer Transaktion.
+Dieser Parameter kann dazu benutzt werden, Key/Value-Paare an das Objekt zu hängen. Dadurch können anwenderspezifische Informationen hinzugefügt werden (beispielweise die Bestellnummer zu einer Transaktion).
 
-Einige Objekte bieten zusätzlich einen `description` Parameter. Dieser kann z.B. dazu benutzt werden um eine Klartext-Beschreibung zu einer Transaktion hinzuzufügen ("1 Paar Sportschuhe, Bestellnr. XY-1234")
+Einige Objekte bieten zusätzlich einen `description`-Parameter. Dieser kann z.B. dazu benutzt werden, eine Klartextbeschreibung zu einer Transaktion hinzuzufügen ("1 Paar Sportschuhe, Bestellnr. XY-1234")
 
 <aside class="notice">
 Metadata kann bis zu 10 Werte-Paare pro Objekt speichern.

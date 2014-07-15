@@ -1,6 +1,6 @@
 # Authentifizierung  
 
-PAYMEY verwendet ein Triple aus KeyIdent, KeySecret und API-Passwort, wobei KeyIdent und Passwort für die HTTP-Authentifizierung verwendet werden, und das KeySecret zur Signierung der einzelnen Anfragen.
+PAYMEY verwendet ein Triple aus KeyIdent, KeySecret und API-Passwort, wobei KeyIdent und Passwort für die HTTP-Authentifizierung verwendet werden und das KeySecret zur Signierung der einzelnen Anfragen.
 
 ## HTTP-Authentifizierung
 
@@ -17,12 +17,14 @@ Die [HTTP-Authentifizierung](http://en.wikipedia.org/wiki/Basic_access_authentic
 
 1. KeyIdent und Passwort werden zu einem String zusammengesetzt "KeyIdent:Passwort"
 2. Dieser String wird Base64 encodiert.
-3. Die Authenifiezierungs-Methode wird mit einem Leerzeichen dem encodierten String vorangestellt "Basic ".
+3. Die Authenifiezierungsmethode wird mit einem Leerzeichen dem encodierten String vorangestellt.
+
+Beispiel:
 
 `Authorization: Basic WVdVeFl6ZzNaVGN4TUdWa01q...`
 
 <aside class="notice">
-    Beim Aufruf von `/auth/login`, bevor das Pairing durchgeführt wurde, kommen Standard-API-Zugangsdaten zum Einsatz.
+    Beim Aufruf von `/auth/login` vor der Durchführung des Pairings kommen Standard-API-Zugangsdaten zum Einsatz.
 </aside>
 
 ## Signatur
@@ -32,7 +34,7 @@ Die [HTTP-Authentifizierung](http://en.wikipedia.org/wiki/Basic_access_authentic
 * **Endpunkt** - Der Host der HTTP-Anfrage
 * **API-Aktion** - Die Aktion der API welche aufgerufen werden soll
 * **Parameter** - Die erforderlichen und optionalen Parameter des Aufrufs
-* **Zeitstempel** - Der Zeitpunkt zu dem der Aufruf durchgeführt wird, im Unix-Timestamp Format.
+* **Zeitstempel** - Der Zeitpunkt zu dem der Aufruf durchgeführt wird im Unix-Timestamp-Format.
 * **Signatur** - Dieser Wert muss berechnet werden und bestätigt, dass der Aufruf valide ist und nicht verändert wurde.
 
 Beispiel:
@@ -42,16 +44,16 @@ Beispiel:
 
 ### Formatierung der Anfrage
 
-1. Beginnen Sie mit der Anfrage Methode (GET, POST, PUT oder DELETE) gefolgt von einem Zeilenumbruch.  
+1. Beginnen Sie mit der Anfragemethode (GET, POST, PUT oder DELETE) gefolgt von einem Zeilenumbruch.  
 `GET\n`
 
-2. Danach folgt der HTTP Host  
+2. Danach folgt der http-Host:  
 `https://api.paymey.com/\n`
 
-3. Fügen Sie nun die API-Aktion hinzu  
+3. Fügen Sie nun die API-Aktion hinzu:  
 `/v2/transactions\n`
 
-4. Fügen Sie die Anfrage Parameter (Die Name-value Paare ohne vorangestelltes ? und URL-encoded) in lexikographischer Ordnung hinzu. (Lexikographische Ordnung beachtet Groß- und Kleinschreibung.)  Die Parameternamen werden dabei durch das Gleichzeichen (=) von ihren Werten getrennt. Die jeweiligen Paare aus Parameter und Wert werden durch das Und-Zeichen verbunden (&).  
+4. Fügen Sie die Anfrage Parameter (die Name/Value-Paare ohne vorangestelltes `?` und URL-encoded) in lexikographischer Ordnung hinzu (lexikographische Ordnung beachtet Groß- und Kleinschreibung).  Die Parameternamen werden dabei durch das Gleichzeichen `=` von ihren Werten getrennt. Die jeweiligen Paare aus Parameter und Wert werden durch das Und-Zeichen `&` verbunden.  
 `paymey_account_id=1&timetamp=1404989965`
 
 5. Der zu signierende String sieht dann folgendermaßen aus:  
@@ -72,22 +74,22 @@ Die resultierende Signatur muss Base-64 encodiert und danach URL-encodiert werde
 `base64 = base64_encode(hash);`  
 `signature = url_encode(base64);`  
 
-Das Ergebniss wird dann zur Anfrage hinzugefügt.
+Das Ergebnis wird dann zur Anfrage hinzugefügt.
 
-## Geräte-Pairing
+## Gerätepairing
 
 Um das Triple aus KeyIdent, KeySecret und API-Passwort auf das Smartphone zu bekommen, verwendet PAYMEY einen QR-Code der die Daten enthält.
 
-Dieser kann in der [PAYMEY-Webapp](https://webapp.paymey.com) (bzw. der [Sandbox-Anwendung](http://webapp.sandbox.pmydev.com)) generiert werden. 
+Dieser kann in der [PAYMEY-Webapp](https://webapp.paymey.com) (bzw. der [Sandboxanwendung](http://webapp.sandbox.pmydev.com)) generiert werden. 
 Loggen Sie sich dazu ein und navigieren Sie zu "Geräte > Neue Geräte hinzufügen", vergeben Sie einen Namen für das Gerät und klicken Sie auf "Speichern".
 
-Der QR-Code enthält folgende Daten in der Dargestellten Reihenfolge und jeweils durch ein Semikolon getrennt (;)
+Der QR-Code enthält folgende Daten in der Dargestellten Reihenfolge und jeweils durch ein Semikolon `;` getrennt.
 
 Pos | Parameter | Beschreibung
 --------- | ------- | -----------
-1 | **account_id** |  Die Account Id zu der das Zugriffstripple gehört
-2 | **user_id** |  Die Id des Benutzers bei PAYMEY
-3 | **email** |  Die E-Mail Addresse des zugehörigen Accounts
+1 | **account_id** |  Die PAYMEY-Account-ID zu der das Zugriffstripple gehört
+2 | **user_id** |  Die ID des Benutzers bei PAYMEY
+3 | **email** |  Die E-Mail-Addresse des zugehörigen PAYMEY-Accounts
 4 | **name** |  Vorname und Nachname des Benutzers
 5 | **key_ident** |  KeyIdent
 6 | **key_secret** |  KeySecret

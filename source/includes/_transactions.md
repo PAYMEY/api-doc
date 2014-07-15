@@ -1,24 +1,24 @@
 # Transaktionen
 
-### Der Transaktions QR-Code
+### Der Transaktions-QR-Code
 
-Der Text eines typischen Transaktions QR-Codes sieht folgendermaßen aus:
+Der Text eines typischen Transaktions-QR-Codes sieht folgendermaßen aus:
 
 `http://www.paymey.com/qr/100000;10%2C00;EUR;1234;1405355094;2`
 
 Wert | Beispiel | Beschreibung
 --------- | ------------ | ------------
 url | http://www.paymey.com/qr/ | Fallback URL
-amount | 100000 | Zu zahlender Betrag in Cent x 100
+amount | 100000 | Zu zahlender Betrag in Cent multipliziert mit 100
 display_amount | 10%2C00 | Zu zahlender Betrag in Cent (formatiert, URL Encoded)
-currency | EUR | ISO-3 Code der Währung
+currency | EUR | ISO-3-Code der Währung
 tan | 1234 | Die TAN der Transaktion
 timestamp | 1405355094 | Zeitstempel der Transaktion
-receiver_id | 2 | PAYMEY Account ID des Empfängers
+receiver_id | 2 | PAYMEY-Account-ID des Empfängers
 
 ### Das Transaktionsobjekt
 
-> BEISPIEL OBJEKT
+> BEISPIELOBJEKT
 
 ```json
 {
@@ -45,24 +45,24 @@ receiver_id | 2 | PAYMEY Account ID des Empfängers
 Wert | Beschreibung
 --------- | ------------
 id | **string**
-object |  **string**, Wert ist "transaction"
+object |  **string**, Wert ist `transaction`.
 created | **timestamp**
-status | **string**<br>Status der Transaktion. Mögliche Werte: `request`, `pending`, `approved`, `error`, `failed`
-payer_id | **string**<br> PAYMEY Account ID des Zahlenden
-payer_user_id | **string** <br> PAYMEY User ID des Zahlenden
-payer_name | **string** <br> Name des Zahlenden
-receiver_id | **string** <br> PAYMEY Account ID des Empfängers
-receiver_user_id | **string** <br> AYMEY User ID des Empfängers
-receiver_name | **string** <br> Name des Empfängers
-currency | **string** <br> ISO-3 Code der Währung der Transaktion.
+status | **string**<br>Status der Transaktion. Mögliche Werte: `request`, `pending`, `approved`, `error`, `failed`.
+payer_id | **string**<br> PAYMEY-Account-ID des Zahlenden.
+payer_user_id | **string** <br> PAYMEY-User-ID des Zahlenden.
+payer_name | **string** <br> Name des Zahlenden.
+receiver_id | **string** <br> PAYMEY-Account-ID des Empfängers.
+receiver_user_id | **string** <br> PAYMEY-User-ID des Empfängers.
+receiver_name | **string** <br> Name des Empfängers.
+currency | **string** <br> ISO-3-Code der Währung der Transaktion.
 amount | **positive integer** <br> Betrag in Cent.
 description | **string** <br> 
-metadata | **metadata hash** <br> Ein Array aus key/value Paaren, die an die Transaktion angehängt werden. Damit kann z.B. die Bestellnummer gespeichert werden.
+metadata | **metadata hash** <br> Ein Array aus Key/Value-Paaren, die an die Transaktion angehängt werden. Damit kann z.B. die Bestellnummer gespeichert werden.
 
 
 ## Neue Transaktion anlegen
 
-> BEISPIEL ANFRAGE
+> BEISPIELANFRAGE
 
 ```shell
 $ curl https://api.paymey.com/v2/transactions \  
@@ -76,7 +76,7 @@ $ curl https://api.paymey.com/v2/transactions \
   -d signature=ZGIwMGQ0NDVjNmQ5NjRhMTgx...
 ```
 
-> BEISPIEL RÜCKGABE
+> BEISPIELRÜCKGABE
 
 ```json
 {
@@ -100,9 +100,9 @@ $ curl https://api.paymey.com/v2/transactions \
 
 ```
 
-Um eine Transaktion durchzuführe müssen sie zuerst eine Transaktion erzeugen. Dies wird im Status `request` angelegt.
+Um eine Transaktion durchzuführen, müssen sie zuerst eine Transaktion erzeugen. Dies wird im Status `request` angelegt.
 
-### HTTP Anfrage
+### http-Anfrage
 
 `POST https://api.paymey.com.com/v2/transactions`
 
@@ -110,11 +110,11 @@ Um eine Transaktion durchzuführe müssen sie zuerst eine Transaktion erzeugen. 
 
 Parameter | Beschreibung
 --------- | ------------
-receiver_id | **required** <br> PAYMEY Account ID des Empfängers.
-currency |  **required** <br> ISO-3 Code der Währung in der die Transaktion durchgeführt werden soll.
+receiver_id | **required** <br> PAYMEY-Account-ID des Empfängers.
+currency |  **required** <br> ISO-3-Code der Währung in der die Transaktion durchgeführt werden soll.
 amount | **required** <br> Betrag in Cent
 description | **optional** <br> String der die Transaktion beschreibt oder zusätzliche Daten enthält. Wird in der Weboberfläche angezeigt.
-metadata | **optional** <br> Ein Array aus key/value Paaren, die an die Transaktion angehängt werden. Damit kann z.B. die Bestellnummer gespeichert werden.
+metadata | **optional** <br> Ein Array aus Key/Value-Paaren, die an die Transaktion angehängt werden. Damit kann z.B. die Bestellnummer gespeichert werden.
 
 ### Rückgabewert
 
@@ -123,7 +123,7 @@ Gibt ein Transaktionsobjekt zurück, wenn die Transaktion angelegt wurde. Gibt e
 
 ## Anfordern einer Transaktion
 
-> BEISPIEL ANFRAGE
+> BEISPIELANFRAGE
 
 ```shell
 $ curl -G https://api.paymey.com/v2/transactions/123 \  
@@ -132,7 +132,7 @@ $ curl -G https://api.paymey.com/v2/transactions/123 \
   -d signature=ZGIwMGQ0NDVjNmQ5NjRhMTgx...
 ```
 
-> BEISPIEL RÜCKGABE
+> BEISPIELRÜCKGABE
 
 ```json
 {
@@ -158,7 +158,7 @@ $ curl -G https://api.paymey.com/v2/transactions/123 \
 
 Retrieves the details of a charge that has previously been created. Supply the unique charge ID that was returned from your previous request, and Stripe will return the corresponding charge information. The same information is returned when creating or refunding the charge.
 
-### HTTP Anfrage
+### http-Anfrage
 
 `GET https://api.paymey.com.com/v2/transactions/<ID>`
 
@@ -176,7 +176,7 @@ Bei dieser Anfrage können nur `description` und  `metadata` verändert werden.
 
 ## Aktualisieren einer Transaktion
 
-> BEISPIEL ANFRAGE
+> BEISPIELANFRAGE
 
 ```shell
 $ curl https://api.paymey.com/v2/transactions/123 \  
@@ -214,7 +214,7 @@ $ curl https://api.paymey.com/v2/transactions/123 \
 
 Retrieves the details of a charge that has previously been created. Supply the unique charge ID that was returned from your previous request, and Stripe will return the corresponding charge information. The same information is returned when creating or refunding the charge.
 
-### HTTP Anfrage
+### http-Anfrage
 
 `PUT https://api.paymey.com.com/v2/transactions/<ID>`
 
@@ -222,9 +222,9 @@ Retrieves the details of a charge that has previously been created. Supply the u
 
 Parameter | Beschreibung
 --------- | ------------
-id | **required** <br> ID der Transaktion
+id | **required** <br> ID der Transaktion.
 description | **optional** <br> String der die Transaktion beschreibt oder zusätzliche Daten enthält. Wird in der Weboberfläche angezeigt.
-metadata | **optional** <br> Ein Array aus key/value Paaren, die an die Transaktion angehängt werden. Damit kann z.B. die Bestellnummer gespeichert werden.
+metadata | **optional** <br> Ein Array aus Key/Value-Paaren, die an die Transaktion angehängt werden. Damit kann z.B. die Bestellnummer gespeichert werden.
 
 ### Rückgabewert
 
@@ -232,7 +232,7 @@ Gibt ein Transaktionsobjekt zurück, wenn eine gültige ID übergeben wurde. Gib
 
 ## Bestätigen einer Transaktion
 
-> BEISPIEL ANFRAGE
+> BEISPIELANFRAGE
 
 ```shell
 $ curl https://api.paymey.com/v2/transactions/123/confirm \  
@@ -242,7 +242,7 @@ $ curl https://api.paymey.com/v2/transactions/123/confirm \
     -d signature=ZGIwMGQ0NDVjNmQ5NjRhMTgx...
 ```
 
-> BEISPIEL RÜCKGABE
+> BEISPIELRÜCKGABE
 
 ```json
 {
@@ -268,7 +268,7 @@ $ curl https://api.paymey.com/v2/transactions/123/confirm \
 
 Retrieves the details of a charge that has previously been created. Supply the unique charge ID that was returned from your previous request, and Stripe will return the corresponding charge information. The same information is returned when creating or refunding the charge.
 
-### HTTP Anfrage
+### http-Anfrage
 
 `PUT https://api.paymey.com.com/v2/transactions/<ID>/confirm`
 
@@ -276,7 +276,7 @@ Retrieves the details of a charge that has previously been created. Supply the u
 
 Parameter | Beschreibung
 --------- | ------------
-id | **required** <br> ID der Transaktion
+id | **required** <br> ID der Transaktion.
 
 ### Rückgabewert
 
@@ -284,7 +284,7 @@ Gibt ein Transaktionsobjekt zurück, wenn eine gültige ID übergeben wurde. Gib
 
 ## Liste alle Transaktionen
 
-> BEISPIEL ANFRAGE
+> BEISPIELANFRAGE
 
 ```shell
 $ curl -G https://api.paymey.com/v2/transactions \  
@@ -294,7 +294,7 @@ $ curl -G https://api.paymey.com/v2/transactions \
   -d signature=ZGIwMGQ0NDVjNmQ5NjRhMTgx...
 ```
 
-> BEISPIEL RÜCKGABE
+> BEISPIELRÜCKGABE
 
 ```json
 {
@@ -330,7 +330,7 @@ $ curl -G https://api.paymey.com/v2/transactions \
 Gibt eine Liste aller Transaktionen zurück, an der `paymey_account_id` als Sender oder Empfänger beteiligt war. Die Transaktionen sind sortiert, beginnend mit der neuesten.
 
 
-### HTTP Anfrage
+### http-Anfrage
 
 `GET https://api.paymey.com/v2/transactions?paymey_account_id=1`
 
@@ -338,14 +338,14 @@ Gibt eine Liste aller Transaktionen zurück, an der `paymey_account_id` als Send
 
 Parameter | Beschreibung
 --------- | ------------
-paymey_account_id | **required** <br> Die ID des gewünschten PAYMEY Accounts  
-limit | **optional** - Default ist 10 <br> Die Anzahl der Objekte die maximal zurück gegeben wird. Das Limit darf zwischen 1 und 100 liegen.  
-starting_after | **optional**<br>Durch `starting_after` wird die Objekt ID definiert, nach der die zurückgegebenen Elemente in der Liste beginnen. Wenn Sie beispielsweise eine Liste mit 10 Objekten anfordern, und diese endet mit `10`, dann können Sie durch Verwendung von `starting_after=10` die folgende Seite der Liste anfordern.  
-ending_before | **optional**<br>Durch `ending_before` wird die Objekt ID definiert, vor der die zurückgegebenen Elemente in der Liste beginnen. Wenn Sie beispielsweise eine Liste mit 10 Objekten anfordern, und diese beginnt mit `10`, dann können Sie durch Verwendung von `ending_before=10` die vorhergehende Seite der Liste anfordern.
+paymey_account_id | **required** <br> Die ID des gewünschten PAYMEY-Accounts.  
+limit | **optional** - Default ist 10 <br> Die Anzahl der Objekte, die maximal zurückgegeben wird. Das Limit darf zwischen 1 und 100 liegen.  
+starting_after | **optional**<br>Durch `starting_after` wird die Objekt-ID definiert, nach der die zurückgegebenen Elemente in der Liste beginnen. Wenn Sie beispielsweise eine Liste mit 10 Objekten anfordern und diese endet mit `10`, dann können Sie durch Verwendung von `starting_after=10` die folgende Seite der Liste anfordern.  
+ending_before | **optional**<br>Durch `ending_before` wird die Objekt-ID definiert, vor der die zurückgegebenen Elemente in der Liste beginnen. Wenn Sie beispielsweise eine Liste mit 10 Objekten anfordern und diese beginnt mit `10`, dann können Sie durch Verwendung von `ending_before=10` die vorhergehende Seite der Liste anfordern.
 
 ### Rückgabewert
 
-Ein Objekt mit einem `data` Wert, der ein Array aller Transaktionen enthält, an der `paymey_account_id` als Sender oder Empfänger beteiligt war, beginnend mit der Transaktion nach der Transaktion in `starting_after`. Jedes Element in diesem Array ist ein eigenes Transaktionsobjekt. Wenn keine weiteren Transaktionen existieren, wird ein leeres Array zurückgegeben.
+Ein Objekt mit einem `data`-Wert, der ein Array aller Transaktionen enthält, an der `paymey_account_id` als Sender oder Empfänger beteiligt war (beginnend mit der Transaktion nach der Transaktion in `starting_after`). Jedes Element in diesem Array ist ein eigenes Transaktionsobjekt. Wenn keine weiteren Transaktionen existieren, wird ein leeres Array zurückgegeben.
 
 
 

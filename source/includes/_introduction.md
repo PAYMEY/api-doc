@@ -1,8 +1,8 @@
 # Einführung
 
-Die PAYMEY API basiert auf [REST](http://en.wikipedia.org/wiki/Representational_State_Transfer). Alle Zugriffe werden auf Ressourcen-orientierte URLs durchgeführt und liefern im Erfolgsfall [JSON](http://www.json.org/) und im Fehlerfall HTTP-Fehler zurück.
+Die PAYMEY-API basiert auf [REST](http://en.wikipedia.org/wiki/Representational_State_Transfer). Alle Zugriffe werden auf ressourcenorientierte URLs durchgeführt und liefern im Erfolgsfall [JSON](http://www.json.org/) und im Fehlerfall HTTP-Fehler zurück.
 
-Neben dem Live-Server steht noch ein Sandbox-Server für Integrations-Tests zur Verfügung.
+Neben dem Liveserver steht noch ein Sandboxserver für Integrationstests zur Verfügung.
 
 Server | Basis-URL
 --------- | ------------
