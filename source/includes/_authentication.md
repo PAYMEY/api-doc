@@ -1,4 +1,4 @@
-# Authentifizierung
+# Authentifizierung  
 
 PAYMEY verwendet ein Triple aus KeyIdent, KeySecret und API-Passwort, wobei KeyIdent und Passwort für die HTTP-Authentifizierung verwendet werden, und das KeySecret zur Signierung der einzelnen Anfragen.
 
